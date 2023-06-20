@@ -175,9 +175,10 @@ class Fighter extends Sprite {
     }
         
     update() {
-        this.loadSprite()
-        this.draw()
         this.gravity()
+        this.loadSprite()
+        this.loadAttackBox()
+        this.draw()
         this.animate()
     }
 
@@ -191,7 +192,7 @@ class Fighter extends Sprite {
 
         setTimeout(() => {
             this.isAttacking = false
-        }, 100)
+        }, 400)
 
         setTimeout(() => {
             this.onAttackCooldown = false
@@ -231,6 +232,11 @@ const player = new Fighter({
             totalSpriteFrames: 4,
             framesPerSpriteFrame: 8
         },
+        attacking: {
+            src: "../assets/player/attacking.png",
+            totalSpriteFrames: 7,
+            framesPerSpriteFrame: 8
+        }
     }
 })
 

@@ -70,23 +70,31 @@ function handleControls() {
     player.setSprite("idle")
 
     if (!player.onGround) player.setSprite("jumping")
+    if (player.isAttacking) player.setSprite("attacking")
 
     movement()
     attacks()
 
     function movement() {
         player.velocity.x = 0
+        if (player.isAttacking) return
 
         if (keys.a.pressed && ["a", "ArrowLeft"].includes(player.lastKeyPressed)) {
             player.velocity.x = -1.2 * 3.4
             player.facing = "left"
-            if(player.onGround) player.setSprite("running")
+
+            if (!player.onGround) return
+
+            player.setSprite("running")
         }
 
         if (keys.d.pressed && ["d", "ArrowRight"].includes(player.lastKeyPressed)) {
             player.velocity.x = 1.2 * 3.4
             player.facing = "right"
-            if(player.onGround) player.setSprite("running")
+
+            if (!player.onGround) return
+
+            player.setSprite("running")
         }
 
         if (keys.w.pressed && !keys.w.hold) {
